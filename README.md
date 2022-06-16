@@ -13,7 +13,7 @@ in `Statically-typed` languages (C, Java, C#, ... ), the type of variable is set
 
 in `Dynamically-typed` languages (PHP, JavaScript, Python, ... ), the type of variable is determined at the run-time and can change later.
 
-`TypeScript` is a programming language build on top of `JavaScript` ( essentially JavaScript with static typing and some additional features ) , so basically you need to know about some JavaScript concepts such as :
+`TypeScript` is a programming language build on top of `JavaScript` ( essentially JavaScript with static typing and some additional features ) , so before we star make sure that you are familiar with this concepts in javascript:
 
 - Variables
 - Arrays
