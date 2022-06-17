@@ -1,6 +1,6 @@
 # TypeScript Fundamentals in One Place
 
-## 1- Introduction :
+## 1- Introduction
 
 <img src="./images/typescript-diagram.png" width="300" />
 
@@ -23,7 +23,7 @@ in `Dynamically-typed` languages (PHP, JavaScript, Python, ... ), the type of va
 - Destructuring
 - ...
 
-## 2- Built-in Types :
+## 2- Built-in Types
 
 as we know `JavaScript` has built-in types like :
 
@@ -336,4 +336,139 @@ processEvent();
 console.log("Hello World!");
 ```
 
-## 3- Object-oriented Programming :
+## 3- Object-oriented Programming
+
+As we know `JavaScript` does'nt have the concept of `classes` like other programming languages such as (PHP, Java, ... ).
+
+with `ES6` you can defined `classes` but it's just a syntactic sugar for creating `constructor function` and `prototypal inheritance`.
+
+Let's see `OOP` in `TypeScript` :
+
+`1- Creating Classes and objects :`
+
+```typescript
+class Account {
+  id: number;
+  owner: string;
+  balance: number;
+
+  constructor(id: number, owner: string, balance: number) {
+    this.id = id;
+    this.owner = owner;
+    this.balance = balance;
+  }
+
+  deposit(amount: number): void {
+    if (amount > 0) {
+      this.balance += amount;
+    }
+
+    throw new Error("Invalid amount");
+  }
+}
+
+let account = new Account(1, "zineddine", 100);
+
+account.deposit(100);
+
+console.log(typeof account); // object
+console.log(account instanceof Account); // true
+
+/*
+
+always make sure ti use istanceof to check if 
+an object is an instance of a class
+
+*/
+```
+
+`2- Read-only and Optional Properties :`
+
+```typescript
+class User {
+  readonly id: number;
+  name: string;
+  email: string;
+  nickname?: string; // optional property
+
+  constructor(id: number, name: string, email: string) {
+    this.id = id;
+    this.name = name;
+    this.email = email;
+  }
+}
+
+let user = new User(1, "zineddine", "hz_haddad@esi.dz");
+user.id = 12; // Cannot assign to 'id' because it is a read-only property
+```
+
+`3- Access Control Keywords :`
+
+```typescript
+class Account {
+  /*
+    public # by default
+    private
+    protected
+  */
+
+  id: number;
+  private _balance: number;
+
+  constructor(id: number, balance: number) {
+    this.id = id;
+    this._balance = balance;
+  }
+
+  deposit(amount: number): void {
+    if (amount > 0) {
+      // assume we want also to log the transaction
+      this._balance += amount;
+    }
+
+    throw new Error("Invalid amount");
+  }
+
+  private calculateTax(amount: number): number {
+    return amount * 0.1;
+  }
+
+  getBalance(): number {
+    return this._balance;
+  }
+}
+
+let account = new Account(1, 100);
+account._balance -= 50; // Property '_balance' is private and only accessible within class 'Account'
+```
+
+`4- Parameter Properties and Getters & Setters :`
+
+```typescript
+class Account {
+  nickname?: string; // optional property
+
+  constructor(
+    public readonly id: number,
+    public owner: string,
+    private _balance: number
+  ) {}
+
+  get balance(): number {
+    return this._balance;
+  }
+
+  set balance(value: number) {
+    if (value < 0) {
+      throw new Error("Balance cannot be negative");
+    }
+    this._balance = value;
+  }
+}
+
+let account = new Account(1, "zineddine", 100);
+
+console.log(account.balance); // 100
+account.balance = -100; // throws error
+account.balance = 100; // OK
+```
