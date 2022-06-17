@@ -23,9 +23,7 @@ in `Dynamically-typed` languages (PHP, JavaScript, Python, ... ), the type of va
 - Destructuring
 - ...
 
-## 2- Fundamentals :
-
-### Build-in Types :
+## 2- Build-in Types :
 
 as we know `JavaScript` has build-in types like :
 
@@ -337,3 +335,5 @@ processEvent();
 
 console.log("Hello World!");
 ```
+
+## 3- Object-oriented Programming :
