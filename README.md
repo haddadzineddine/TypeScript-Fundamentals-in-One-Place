@@ -338,7 +338,7 @@ console.log("Hello World!");
 
 ## 3- Object-oriented Programming
 
-As we know `JavaScript` does'nt have the concept of `classes` like other programming languages such as (PHP, Java, ... ).
+As we know `JavaScript` does'nt have the concept of `classes` like other programming languages such as ( PHP, Java, C++, C# ... ).
 
 with `ES6` you can defined `classes` but it's just a syntactic sugar for creating `constructor function` and `prototypal inheritance`.
 
