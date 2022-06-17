@@ -57,7 +57,7 @@ anyType = "Random string";
 console.log(typeof anyType); // output: string
 ```
 
-`Note :` If you want to declare a variable of `number, string, ...,` or a function you just need to use this syntax :
+`Note :` To declare `variables, functions` you just need to follow this syntax :
 
 ```typescript
 let numberType: number = 12;
