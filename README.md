@@ -43,7 +43,7 @@ So `TypeScript` extend this list and introduce some new build-in types such as :
 - enum
 - tuple
 
-`1- The any type :` when you declare a variable and don't initialize it , the typescript compiler will assume that variable is type of `any` which means you can assign any type of data into it , here is an example :
+`1- The Any Type :` when you declare a variable and don't initialize it , the typescript compiler will assume that variable is type of `any` which means you can assign any type of data into it , here is an example :
 
 ```typescript
 let anyType; // let anyType: any
@@ -261,7 +261,7 @@ let log: any = null;
 log?.("hello"); // return undefined
 ```
 
-`11- Nullish Coalescing operator :`
+`11- Nullish Coalescing Operator :`
 
 ```typescript
 let speed: number | null = null;
@@ -288,7 +288,7 @@ let email = document.getElementById("email") as HTMLInputElement;
 email.value;
 ```
 
-`13- The unknown Type :`
+`13- The Unknown Type :`
 
 ```typescript
 function render(document: any) {
@@ -310,7 +310,7 @@ function render(document: unknown) {
 }
 ```
 
-`13- The never Type :`
+`13- The Never Type :`
 
 ```typescript
 function reject(message: string): never {
