@@ -23,9 +23,9 @@ in `Dynamically-typed` languages (PHP, JavaScript, Python, ... ), the type of va
 - Destructuring
 - ...
 
-## 2- Build-in Types :
+## 2- Built-in Types :
 
-as we know `JavaScript` has build-in types like :
+as we know `JavaScript` has built-in types like :
 
 - number
 - string
@@ -35,7 +35,7 @@ as we know `JavaScript` has build-in types like :
 - undefined
 - null
 
-So `TypeScript` extend this list and introduce some new build-in types such as :
+So `TypeScript` extend this list and introduce some new built-in types such as :
 
 - any
 - unknown
