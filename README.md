@@ -1,6 +1,6 @@
-# All TypeScript Fundamentals in One Place
+# TypeScript Fundamentals in One Place
 
-## 1- Introduction & Prerequisites :
+## 1- Introduction :
 
 <img src="./images/typescript-diagram.png" width="300" />
 
@@ -139,4 +139,201 @@ let user: {
 };
 
 user.id = 10; // Cannot assign to 'id' because it is a read-only property
+```
+
+`5- Type Aliases :`
+
+```typescript
+type User = {
+  readonly id: number;
+  name: string;
+  pseudo?: string;
+  retire: (date: Date) => void; // function declaration
+};
+
+let user: User = {
+  id: 1,
+  name: "zineddine",
+  retire: (date: Date) => {
+    console.log(date);
+  },
+};
+```
+
+`6- Union Types :`
+
+```typescript
+function kgToLbs(kg: number | string): number {
+  // Narrowing
+  if (typeof kg === "string") {
+    return parseFloat(kg) * 2.2046;
+  }
+
+  return kg * 2.2046;
+}
+```
+
+`7- Intersection Types :`
+
+```typescript
+// make no sense right ?
+let weight: number & string;
+
+// let see a realistic example
+
+type draggable = {
+  drag: () => void;
+};
+
+type resizable = {
+  resize: () => void;
+};
+
+let UIWidget: draggable & resizable;
+
+UIWidget = {
+  drag: () => {},
+  resize: () => {},
+};
+```
+
+`8- Literal Types :`
+
+```typescript
+// let quantity: 5 | 100;
+
+type Quantity = 50 | 100;
+let quantity: Quantity;
+
+quantity = 5; // Type '5' is not assignable to type 'Quantity'
+
+type Metric = "m" | "cm" | "mm";
+```
+
+`9- Nullable Types :`
+
+```typescript
+function greeting(name: string | null | undefined) {
+  if (name) {
+    return `Hello, ${name}`;
+  }
+  return "Hello, World";
+}
+
+greeting("John");
+greeting(null);
+greeting(undefined);
+```
+
+`10- Optional Chaining :`
+
+```typescript
+type User = {
+  id: number;
+  birthday?: Date;
+};
+
+function getUser(id: number): User | null | undefined {
+  if (id === 1) {
+    return {
+      id,
+      birthday: new Date("2000-01-01"),
+    };
+  }
+
+  return null;
+}
+
+getUser(0); // output null
+
+getUser(1); // output { id: 1, birthday: Date }
+
+// optional property access operator
+getUser(1)?.birthday?.getFullYear(); // output 2000
+
+// optional element access operator
+
+let employees: string[] | null = null;
+employees?.[0];
+
+// optional function call operator
+
+let log: any = null;
+
+log?.("hello"); // return undefined
+```
+
+`11- Nullish Coalescing operator :`
+
+```typescript
+let speed: number | null = null;
+
+let ride = {
+  // Falsy values ( false, 0, '', null, undefined )
+  // speed: speed || 30, if speed is falsy, set it to 30 , but 0 is falsy
+  // speed: speed != null ? speed : 30,
+  speed: speed ?? 30,
+};
+```
+
+`12- Type Assertions :`
+
+```typescript
+let phone = document.getElementById("phone");
+
+phone.value; // Property 'value' does not exist on type 'HTMLElement'
+
+// let email = <HTMLInputElement> document.getElementById('email');
+
+let email = document.getElementById("email") as HTMLInputElement;
+
+email.value;
+```
+
+`13- The unknown Type :`
+
+```typescript
+function render(document: any) {
+  // no compile error , but runtime error
+  document.whatEver();
+}
+
+function render(document: unknown) {
+  /*
+  compile error, now the compîler forces us to check the type of the argument before using it
+
+  */
+
+  document.whatEver();
+
+  if (document instanceof String) {
+    document.toLocaleLowerCase();
+  }
+}
+```
+
+`13- The never Type :`
+
+```typescript
+function reject(message: string): never {
+  throw new Error(message);
+}
+
+function processEvent(): never {
+  while (true) {
+    // ...
+  }
+}
+
+processEvent();
+
+/*
+
+ => this code will never be executed , but the compiler don't tell us , so we have to use the `never` type.
+
+ => now the compiler will tell us that the function will never return : Unreachable code detected.
+
+ */
+
+console.log("Hello World!");
 ```
