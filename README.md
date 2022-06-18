@@ -555,6 +555,13 @@ let student = new Student("John", "Doe", 123);
 console.log(student.fullName);
 student.walk();
 
+/*
+
+  Walking
+  Walking on the stairs
+
+*/
+
 console.log(student instanceof Person); // true
 ```
 
