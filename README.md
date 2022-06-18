@@ -376,7 +376,7 @@ console.log(account instanceof Account); // true
 
 /*
 
-always make sure ti use istanceof to check if 
+always make sure to use instanceof property to check if 
 an object is an instance of a class
 
 */
@@ -517,10 +517,10 @@ let ride2 = new Ride();
 ride1.start();
 ride2.start();
 
-console.log(Ride.activeRides);
+console.log(Ride.activeRides); // 2
 ```
 
-`7- Inheritance and Methode Overriding : `
+`7- Inheritance and Methods Overriding :`
 
 ```typescript
 class Person {
