@@ -1,6 +1,6 @@
 <h1 align="center">
 <br>
-  <a href="https://github.com/leonardomso/33"><img src="./images/typescript.png" alt="33 Concepts Every JS Developer Should Know" width=200" /></a>
+  <a href="https://github.com/haddadzineddine/TypeScript-Fundamentals-in-One-Place"><img src="./images/typescript.png" alt="33 Concepts Every JS Developer Should Know" width=200" /></a>
   <br>
     <br>
   TypeScript Fundamentals in One Place
@@ -15,8 +15,6 @@
 2. **[Built-in Types](#2-built-in-types)**
 3. **[Object Oriented Programming](#3-object-oriented-programming)**
 4. **[Generic](#4-generics)**
-
-
 
 ## 1. Introduction
 
