@@ -1,8 +1,24 @@
-# TypeScript Fundamentals in One Place
+<h1 align="center">
+<br>
+  <a href="https://github.com/leonardomso/33"><img src="./images/typescript.png" alt="33 Concepts Every JS Developer Should Know" width=200" /></a>
+  <br>
+    <br>
+  TypeScript Fundamentals in One Place
+  <br><br>
+</h1>
 
-## 1- Introduction
+[![Follow me](https://img.shields.io/twitter/follow/zineddine_dz_21.svg?style=for-the-badge)](https://twitter.com/zineddine_dz_21)
 
-<img src="./images/typescript-diagram.png" width="300" />
+## <a id="table-of-contents">Table of Contents</a>
+
+1. **[Introduction](#1-introduction)**
+2. **[Built-in Types](#2-built-in-types)**
+3. **[Object Oriented Programming](#3-object-oriented-programming)**
+4. **[Generic](#4-generics)**
+
+
+
+## 1. Introduction
 
 Programming language divide into two categories :
 
@@ -23,7 +39,7 @@ in `Dynamically-typed` languages (PHP, JavaScript, Python, ... ), the type of va
 - Destructuring
 - ...
 
-## 2- Built-in Types
+## 2. Built-in Types
 
 as we know `JavaScript` has built-in types like :
 
@@ -336,7 +352,7 @@ processEvent();
 console.log("Hello World!");
 ```
 
-## 3- Object-oriented Programming
+## 3. Object-oriented Programming
 
 As we know `JavaScript` does'nt have the concept of `classes` like other programming languages such as ( PHP, Java, C++, C# ... ).
 
@@ -694,7 +710,7 @@ let user: User = {
 };
 ```
 
-## 4- Generics
+## 4. Generics
 
 `1- Generic Classes and The Keyof Operator :`
 
