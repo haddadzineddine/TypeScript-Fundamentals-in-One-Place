@@ -382,6 +382,8 @@ an object is an instance of a class
 */
 ```
 
+`Note :` You can't use the `function` keyword inside a `class` to declare a `function`, use it only when you declare a `stand-alone function`.
+
 `2- Read-only and Optional Properties :`
 
 ```typescript
@@ -689,5 +691,163 @@ type User = {
 
 let user: User = {
   name: "Zineddine",
+};
+```
+
+## 4- Generics
+
+`1- Generic Classes and The Keyof Operator :`
+
+```typescript
+class KeyValuePair<K, V> {
+  constructor(public key: K, public value: V) {}
+}
+
+let kvp = new KeyValuePair<string, number>("name", 10);
+/*
+
+you can also use this syntax :
+  let kvp = new KeyValuePair('name', 10); 
+  the compiler will refer the type of the key and value for us
+
+*/
+```
+
+`2- Generic Functions :`
+
+```typescript
+class ArrayUtils {
+  static wrapInArray<T>(value: T) {
+    return Array.isArray(value) ? value : [value];
+  }
+}
+
+let numbers = ArrayUtils.wrapInArray(1);
+let strings = ArrayUtils.wrapInArray("hello");
+
+console.log(numbers); // [1]
+console.log(strings); // ["hello"]
+```
+
+`3- Generic Interfaces :`
+
+```typescript
+interface Result<T> {
+  data: T | null;
+  error: string | null;
+}
+
+interface User {
+  userName: string;
+}
+
+interface Product {
+  productName: string;
+}
+
+function fetch<T>(url: string): Result<T> {
+  return {
+    data: null,
+    error: null,
+  };
+}
+
+fetch<User>("url").data?.userName;
+fetch<Product>("url").data?.productName;
+```
+
+`4- Generic Constraints :`
+
+```typescript
+class Person {
+  constructor(public name: string) {}
+}
+
+class Student extends Person {}
+
+function echo<T extends Person>(arg: T): T {
+  return arg;
+}
+
+echo(new Person("John"));
+echo(new Student("Zineddine"));
+echo(10); // Argument of type 'number' is not assignable to parameter of type 'Person'
+```
+
+`5- Extending Generic Classes :`
+
+```typescript
+class Product {
+  constructor(public name: string, public price: number) {}
+}
+
+class Store<T> {
+  protected _objects: T[] = [];
+
+  addObject(object: T) {
+    this._objects.push(object);
+  }
+
+  find(property: keyof T, value: unknown): T[] {
+    return this._objects.filter((o) => o[property] === value);
+  }
+}
+
+// pass on the generic type parameter
+class CompressibleStore<T> extends Store<T> {
+  compress() {
+    this._objects.forEach((object) => {
+      console.log(object);
+    });
+  }
+}
+
+let compressibleStore = new CompressibleStore<Product>();
+compressibleStore.addObject(new Product("Product 1", 100));
+
+compressibleStore.compress(); // Product { name: 'Product 1', price: 100 }
+
+// Restrictions the generic type parameter
+class SearchableStore<T extends { name: string }> extends Store<T> {
+  search(searchTerm: string) {
+    this._objects.find((object) => {
+      return object.name === searchTerm;
+    });
+  }
+}
+
+// Fix the generic type parameter
+class ProductStore extends Store<Product> {}
+
+let store = new Store<Product>();
+
+store.addObject(new Product("Product 1", 100));
+store.addObject(new Product("Product 2", 200));
+
+store.find("name", "Product 1"); // [Product { name: 'Product 1', price: 100 }]
+
+store.find("name", "Product 3"); // []
+
+store.find("nonExistingProperty", "Product 3"); // Argument of type '"nonExistingProperty"' is not assignable to parameter of type 'keyof Product'
+```
+
+`6- Type mapping :`
+
+```typescript
+interface Product {
+  name: string;
+  price: number;
+}
+
+type ReadOnly<T> = {
+  readonly [K in keyof T]: T[K];
+};
+
+type Optional<T> = {
+  [K in keyof T]?: T[K];
+};
+
+type Nullable<T> = {
+  [K in keyof T]: T[K] | null;
 };
 ```
