@@ -472,3 +472,215 @@ console.log(account.balance); // 100
 account.balance = -100; // throws error
 account.balance = 100; // OK
 ```
+
+`5- Index Signatures :` Index Signatures are just a fancy name for `dynamic properties`
+
+```typescript
+class NameByNumber {
+  // index signature property
+  [name: string]: number;
+}
+
+let nameByNumber = new NameByNumber();
+
+nameByNumber.John = 1;
+// nameByNumber.['John'] = 1;
+// nameByNumber.John = '1'; Type 'string' is not assignable to type 'number'
+nameByNumber.Jane = 2;
+nameByNumber.Bob = 3;
+
+console.log(nameByNumber.John); // 1
+```
+
+`6- Static Members :`
+
+```typescript
+class Ride {
+  private static _activeRides: number = 0;
+
+  start() {
+    Ride._activeRides++;
+  }
+
+  end() {
+    Ride._activeRides--;
+  }
+
+  static get activeRides() {
+    return Ride._activeRides;
+  }
+}
+
+let ride1 = new Ride();
+let ride2 = new Ride();
+
+ride1.start();
+ride2.start();
+
+console.log(Ride.activeRides);
+```
+
+`7- Inheritance and Methode Overriding : `
+
+```typescript
+class Person {
+  constructor(public firstName: string, public lastName: string) {}
+
+  get fullName() {
+    return this.firstName + " " + this.lastName;
+  }
+
+  walk() {
+    console.log("Walking");
+  }
+}
+
+class Student extends Person {
+  constructor(firstName: string, lastName: string, public id: number) {
+    super(firstName, lastName);
+  }
+
+  override walk() {
+    super.walk();
+    console.log("Walking on the stairs");
+  }
+
+  override get fullName() {
+    return "Student : " + super.fullName;
+  }
+}
+
+let student = new Student("John", "Doe", 123);
+
+console.log(student.fullName);
+student.walk();
+
+console.log(student instanceof Person); // true
+```
+
+`8- Polymorphism :`
+
+```typescript
+// parent class , base class , super class
+class Person {
+  protected steps: number = 0;
+
+  constructor(public firstName: string, public lastName: string) {}
+
+  get fullName() {
+    return this.firstName + " " + this.lastName;
+  }
+}
+
+// child class , sub class , derived class
+class Student extends Person {
+  constructor(firstName: string, lastName: string, public id: number) {
+    super(firstName, lastName);
+  }
+
+  override get fullName() {
+    return "Student : " + super.fullName;
+  }
+}
+
+class Teacher extends Person {
+  constructor(firstName: string, lastName: string, public id: number) {
+    super(firstName, lastName);
+  }
+
+  override get fullName() {
+    return "Teacher : " + super.fullName;
+  }
+}
+
+function printName(persons: Person[]) {
+  for (let person of persons) {
+    console.log(person.fullName);
+  }
+}
+
+printName([
+  new Person("John", "Doe"),
+  new Student("Jane", "Doe", 123),
+  new Teacher("John", "Doe", 123),
+]);
+
+/*
+
+John Doe
+Student : Jane Doe
+Teacher : John Doe
+
+*/
+```
+
+`9- Abstract Classes :`
+
+```typescript
+abstract class Shape {
+  constructor(public color: string) {}
+
+  abstract render(): void;
+}
+
+class Circle extends Shape {
+  constructor(public radius: number, color: string) {
+    super(color);
+  }
+
+  override render(): void {
+    console.log("Circle");
+  }
+}
+
+let shape = new Shape("red"); // Cannot create an instance of an abstract class
+```
+
+`10- Interfaces :`
+
+```typescript
+interface Calender {
+  name: string;
+  addEvent(event: string): void;
+  removeEvent(event: string): void;
+}
+
+interface CloudCalender extends Calender {
+  sync(): void;
+}
+
+class GoogleCalender implements CloudCalendar {
+  constructor(public name: string) {}
+
+  addEvent(event: string): void {
+    console.log(`Adding ${event} to GoogleCalendar`);
+  }
+  removeEvent(event: string): void {
+    console.log(`Removing ${event} from GoogleCalendar`);
+  }
+  sync(): void {
+    console.log("Syncing GoogleCalendar");
+  }
+}
+```
+
+`Note :` In `TypeScript`, `interfaces` and `type aliases` can be used interchangeably.
+Both can be used to describe the shape of an object
+
+```typescript
+interface Person {
+  name: string;
+}
+
+let person: Person = {
+  name: "Zineddine",
+};
+
+type User = {
+  name: string;
+};
+
+let user: User = {
+  name: "Zineddine",
+};
+```
