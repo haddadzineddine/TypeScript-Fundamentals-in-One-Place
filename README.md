@@ -1,6 +1,6 @@
 <h1 align="center">
 <br>
-  <a href="https://github.com/haddadzineddine/TypeScript-Fundamentals-in-One-Place"><img src="./images/typescript.png" alt="33 Concepts Every JS Developer Should Know" width=200" /></a>
+  <a href="https://github.com/haddadzineddine/TypeScript-Fundamentals-in-One-Place"><img src="./images/typescript.png" alt="TypeScript Fundamentals in One Place" width=200" /></a>
   <br>
     <br>
   TypeScript Fundamentals in One Place
