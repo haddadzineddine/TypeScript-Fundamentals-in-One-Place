@@ -15,6 +15,7 @@
 2. **[Built-in Types](#2-built-in-types)**
 3. **[Object Oriented Programming](#3-object-oriented-programming)**
 4. **[Generic](#4-generics)**
+5. **[Decorators](#4-decorators)**
 
 ## 1. Introduction
 
@@ -865,3 +866,116 @@ type Nullable<T> = {
   [K in keyof T]: T[K] | null;
 };
 ```
+
+## 4. Decorators
+
+A decorator is just a **function** that gets called by the javaScript runtime, in that function we have a chance to modify a class and its members.
+
+Decorators are often used in frameworks ( eg angular , vue , nest js ... ) to chance and enhace classes and how they behave.
+
+We can apply decorators on classes, properties, methodes, parameters, and accessors ( Getters and Setters ).
+
+We can apply more than one decorator to class or its memebers. Multiple decorators are applied in the reverse order.
+
+To use decorators, we have to enable **experimentalDecorators** setting in tsconfig.
+
+`1- Class decorators :`
+
+```typescript
+function Component(constructor: Function) {
+// Here we have a chance to modify members of // the target class. constructor.prototype.uniqueId = Date.now();
+} 
+
+@Component
+class ProfileComponent { }
+```
+
+`2- Parameterized decorators :`
+
+```typescript
+function Component(value: number) { 
+  return (constructor: Function) => {
+    // Here we have a chance to modify members of 
+    // the target class.  
+    constructor.prototype.uniqueId = Date.now();
+  }; 
+}
+@Component(1)
+class ProfileComponent {}
+```
+
+`3- Decorator composition :`
+
+```typescript
+// Multiple decorators are applied in reverse order.
+// Pipe followed by Component.
+@Component
+@Pipe
+class ProfileComponent {}
+```
+
+`4- Method decorators :`
+
+```typescript
+function Log(target: any, methodName: string, descriptor: PropertyDescriptor) {
+  // We get a reference to the original method
+  const original = descriptor.value as Function; 
+  // Then, we redefine the method 
+  descriptor.value = function(...args: any) {
+    // We have a chance to do something first
+    console.log('Before');
+    // Then, we call the original method 
+    original.call(this, ...args;
+    // And we have a chance to do something after 
+    console.log('After');
+  } 
+}
+
+class Person {
+  @Log
+  say(message: string) {} 
+}
+```
+
+`4- Accessor decorators :`
+
+```typescript
+function Capitalize(target: any, methodName: string, descriptor: PropertyDescriptor) {
+    const original = descriptor.get; 
+    descriptor.get = function() {
+      const result = original.call(this);
+      return 'newResult';
+    }
+}
+
+class Person { 
+  @Capitalize
+  get fullName() {}
+}
+```
+
+`5- Property decorators :`
+
+```typescript
+function MinLength(length: number) {
+  return (target: any, propertyName: string) => {
+    // We use this variable to hold the value behind the
+    // target property.
+    let value: string;
+    // We create a descriptor for the target property.
+    const descriptor: PropertyDescriptor = {
+    // We're defining the setter for the target property. 
+      set(newValue: string) {
+        if (newValue.length < length) throw new Error();
+            value = newValue;
+      }
+    }
+      // And finally, we redefine the property.
+    Object.defineProperty(target, propertyName, descriptor); 
+  }
+}
+class User { 
+  @MinLength(4) password: string;
+}
+```
+
